@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const access_token = req.body;
     const decoded = jwt.verify(access_token, process.env.JWT) as Token;
     
-    const sql = `SELECT id, role, name, firstname, password FROM users WHERE id = ? AND email = ?`;
+    const sql = `SELECT id, name, firstname, domain FROM users WHERE id = ? AND email = ?`;
     const result = await sqlQuery(sql, [decoded.id, decoded.email]);
     
     if (result.length === 0) throw { message: 'Token invalide'};

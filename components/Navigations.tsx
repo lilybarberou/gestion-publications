@@ -1,24 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export default function Navigation() {
     const router = useRouter();
-    const [isAdmin, setIsAdmin] = useState(false);
-
-    // check if user is admin
-    useEffect(() => {
-        const member = window.localStorage.getItem('user');
-        if (member && JSON.parse(member).role === 1) setIsAdmin(true);
-    }, [router.pathname]);
 
     // declare navLinks
     const navLinks = [
         { title: 'Accueil', path: '/' },
-        { title: 'Consommations journalières', path: '/consommations-journalieres' },
-        { title: 'Consommations mensuelles', path: '/consommations-mensuelles' },
-        { cond: isAdmin, title: 'Ajouter une consommation', path: '/consommations/ajouter' },
+        { title: "Ajout d'une publication", path: '/ajout-publication' },
     ];
 
     const handleLogout = () => {
@@ -30,14 +20,11 @@ export default function Navigation() {
     if (['/connexion', '/inscription'].includes(router.pathname)) return null;
     return (
         <S.Container>
-            {navLinks.map((link) => {
-                if (link.hasOwnProperty('cond') && !link.cond) return null;
-                return (
-                    <Link key={link.path} href={link.path} className={router.pathname === link.path ? 'active' : ''}>
-                        {link.title}
-                    </Link>
-                );
-            })}
+            {navLinks.map((link) => (
+                <Link key={link.path} href={link.path} className={router.pathname === link.path ? 'active' : ''}>
+                    {link.title}
+                </Link>
+            ))}
             <S.Disconnect onClick={handleLogout}>Déconnexion</S.Disconnect>
         </S.Container>
     );

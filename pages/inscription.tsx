@@ -40,15 +40,16 @@ export default function Register() {
             <Head>
                 <title>Inscription</title>
             </Head>
-            <S.Form id="form" onSubmit={handleSubmit}>
+            <S.Form id='form' onSubmit={handleSubmit}>
                 <h1>Inscription</h1>
-                <Input defaultValue="a@a.a" type="email" placeholder="Email" name="email" required={true} autoComplete="off" />
-                <Input type="password" placeholder="Mot de passe" name="password" required={true} autoComplete="off" />
-                <Input type="password" placeholder="Répéter le mot de passe" name="password_repeat" required={true} autoComplete="off" />
-                <Input placeholder="Prénom" name="firstname" required={true} autoComplete="off" />
-                <Input placeholder="Nom" name="name" required={true} autoComplete="off" />
+                <Input defaultValue='a@a.a' type='email' placeholder='Email' name='email' required={true} autoComplete='off' />
+                <Input type='password' placeholder='Mot de passe' name='password' required={true} autoComplete='off' />
+                <Input type='password' placeholder='Répéter le mot de passe' name='password_repeat' required={true} autoComplete='off' />
+                <Input placeholder='Prénom' name='firstname' required={true} autoComplete='off' />
+                <Input placeholder='Nom' name='name' required={true} autoComplete='off' />
+                <Input placeholder='Domaine de recherche' name='domain' required={true} autoComplete='off' />
                 <div>
-                    <Link href="/connexion">Connexion</Link>
+                    <Link href='/connexion'>Connexion</Link>
                     <Button>S'inscrire</Button>
                 </div>
             </S.Form>

@@ -7,7 +7,6 @@ export default function RequireAuth(props: PropsWithChildren) {
     const { children } = props;
     const router = useRouter();
     const pageAllowed = ['/connexion', '/inscription'].includes(router.pathname);
-    const noAdminAllowed = ['/'].includes(router.pathname);
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -15,12 +14,6 @@ export default function RequireAuth(props: PropsWithChildren) {
         const access_token = localStorage.getItem('access_token');
         const user: any = localStorage.getItem('user');
         if ((!access_token || !user) && router.pathname !== '/inscription') router.push('/connexion');
-
-        // check if admin, to access private pages
-        if (user) {
-            const parsedUser = JSON.parse(user);
-            if (parsedUser.role === 2 && !noAdminAllowed) router.push('/');
-        }
 
         const checkAuth = async () => {
             const query = await fetchApi('authenticate', { method: 'POST', body: access_token });
